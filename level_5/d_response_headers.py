@@ -39,10 +39,14 @@ class BaseHeadersMixin:
 
 class CustomResponse(BaseResponse, BaseHeadersMixin):
     def generate_headers(self) -> Mapping[str, str]:
-        return super().generate_headers()
+        custom_headers = super().generate_headers()
+        custom_headers.update({
+            "Content-Length": self.get_byte_content_length()
+        })
+        return custom_headers
 
 
 if __name__ == '__main__':
     custom_response = CustomResponse(content='Hello, World!')
     print(custom_response.content)
-    print(custom_response.get_byte_content_length())
+    print(custom_response.generate_headers())
