@@ -12,16 +12,19 @@
 """
 
 
+from typing import Mapping
+
+
 class BaseResponse:
-    def __init__(self, content: str):
+    def __init__(self, content: str) -> None:
         self.content = content
 
-    def get_byte_content_length(self):
+    def get_byte_content_length(self) -> str:
         return len(self.content.encode('utf-8'))
 
 
 class BaseHeadersMixin:
-    def generate_base_headers(self):
+    def generate_base_headers(self) -> Mapping[str, str]:
         return {
             'Content-Type': 'application/x-www-form-urlencoded',
             'user-agent': (
@@ -30,11 +33,16 @@ class BaseHeadersMixin:
             ),
         }
 
-    def generate_headers(self):
+    def generate_headers(self) -> Mapping[str, str]:
         return self.generate_base_headers()
 
 
-# код писать тут
+class CustomResponse(BaseResponse, BaseHeadersMixin):
+    def generate_headers(self) -> Mapping[str, str]:
+        return super().generate_headers()
+
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    custom_response = CustomResponse(content='Hello, World!')
+    print(custom_response.content)
+    print(custom_response.get_byte_content_length())
