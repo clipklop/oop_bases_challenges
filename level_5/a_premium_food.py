@@ -7,7 +7,7 @@
        в конце добавлялось слово Premium.
        Например: Product title: Avocado, price: 12 (Premium)'
     3. Создать экземпляр класс FoodProduct с ценой меньше 10 и вызвать у него метод get_product_info.
-    3. Создать экземпляр класс FoodProduct с ценой больше 10 и вызвать у него метод get_product_info.
+    4. Создать экземпляр класс FoodProduct с ценой больше 10 и вызвать у него метод get_product_info.
 """
 
 
