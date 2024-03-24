@@ -1,4 +1,4 @@
-""""
+"""
 У нас есть функции для работы с пользователем, но хочется работать с ним через класс.
 
 Задания:
@@ -6,11 +6,11 @@
 """
 
 
-def make_username_capitalized(username: str):
+def make_username_capitalized(username: str) -> str:
     return username.capitalize()
 
 
-def generate_short_user_description(username: str, user_id: int, name: str):
+def generate_short_user_description(username: str, user_id: int, name: str) -> str:
     return f'User with id {user_id} has {username} username and {name} name'
 
 

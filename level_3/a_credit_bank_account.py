@@ -2,51 +2,40 @@
 У нас есть класс кредитного банковского аккаунта со свойствами: полное имя владельца и баланс.
 
 Задания:
-    1. Нужно вынести методы, которые не относится непосредственно к кредитам в отдельны класс BankAccount.
+    1. Нужно вынести методы, которые не относится непосредственно к кредитам в отдельный
+        класс BankAccount.
     2. CreditAccount нужно отнаследовать от BankAccount.
     3. Создать экземпляр класс BankAccount и вызвать у него каждый из возможных методов.
     4. Создать экземпляр класс CreditAccount и вызвать у него каждый из возможных методов.
 """
 
-# код писать тут
+
 class BankAccount:
-    def __init__(self, owner_full_name: str, balance: float) -> None:
+    def __init__(self, owner_full_name: str, balance: float):
         self.owner_full_name = owner_full_name
         self.balance = balance
 
-    def increase_balance(self, amount: float) -> None:
+    def increase_balance(self, amount: float) -> float:
         self.balance += amount
+        return self.balance
 
-    def decrease_balance(self, amount: float) -> None:
+    def decrease_balance(self, amount: float) -> float:
         self.balance -= amount
+        return self.balance
 
 
 class CreditAccount(BankAccount):
-    def __init__(self, owner_full_name: str, balance: float) -> None:
-        super().__init__(owner_full_name, balance)
-
-    def is_eligible_for_credit(self) -> float:
+    def is_eligible_for_credit(self) -> bool:
         return self.balance > 1000
 
 
 if __name__ == '__main__':
-    arseny_porter_bank_account = BankAccount(owner_full_name='Arseny Porter', balance=1000.5)
-    print(f"Bank account: {arseny_porter_bank_account.owner_full_name}")
-    print(arseny_porter_bank_account.balance)
+    bank_account = BankAccount('Dusky', 99.9)
+    bank_account.increase_balance(900)
+    bank_account.decrease_balance(900)
+    print(bank_account.balance)
 
-    arseny_porter_bank_account.increase_balance(10.0)
-    arseny_porter_bank_account.decrease_balance(5.99)
-
-    print(arseny_porter_bank_account.balance)
-    
-    arseny_porter_credit_account = CreditAccount(owner_full_name='Arseny Porter', balance=1000.5)
-    print(f"Credit account: {arseny_porter_credit_account.owner_full_name}")
-
-    print(arseny_porter_credit_account.balance)
-
-    arseny_porter_credit_account.decrease_balance(.6)
-
-    print(
-        (f"Is {arseny_porter_credit_account.owner_full_name} with "
-        f"{arseny_porter_credit_account.balance} balance eligible for the the credit: "
-        f"{arseny_porter_credit_account.is_eligible_for_credit()}"))
+    credit_account = CreditAccount('Musky', 99.9)
+    credit_account.increase_balance(600)
+    credit_account.decrease_balance(500)
+    print(credit_account.balance)

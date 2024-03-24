@@ -22,12 +22,14 @@ class TextProcessor:
 
 class AdvancedTextProcessor(TextProcessor):
     def summarize(self) -> str:
-        len_words_in_text = len(self.text.split(' '))
-        return super().summarize() + f", total number of words in the text: {len_words_in_text}"
+        return super().summarize() + \
+            f', total number of words in the text: {len(self.text.split())}'
 
 
 if __name__ == '__main__':
-    advanced_text_processor = AdvancedTextProcessor(
-        "Переопределите метод summarize у класса AdvancedTextProcessor таким образом, чтобы он "
-        "возвращал еще и количество слов в тексте.")
-    print(advanced_text_processor.summarize())
+    test_text = "Переопределите метод summarize у класса AdvancedTextProcessor таким" \
+        "образом, чтобы он возвращал еще и количество слов в тексте."
+
+    atp = AdvancedTextProcessor(test_text)
+    print(atp.to_upper())
+    print(atp.summarize())

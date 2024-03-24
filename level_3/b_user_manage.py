@@ -8,17 +8,19 @@
     2. Создайте класс SuperAdminManager, который будет наследником AdminManager.
        У него должен быть свой уникальный метод ban_all_users, который будет удалять все юзернэймы из списка.
     3. Создайте экземпляры каждого из трех классов и у каждого экземпляра вызовите все возможные методы.
+# noqa: E501
 """
 
 
 class UserManager:
     def __init__(self) -> None:
-        self.usernames = []
+        self.usernames: list[str] = []
 
     def add_user(self, username: str) -> None:
         self.usernames.append(username)
 
-    def get_users(self) -> str:
+    def get_users(self) -> list[str]:
+        print(self.usernames)
         return self.usernames
 
 
@@ -26,31 +28,25 @@ class AdminManager(UserManager):
     def ban_username(self, username: str) -> None:
         if username in self.usernames:
             self.usernames.remove(username)
-            print(f"Username {username} has been deleted from the list.")
+            print(f"Пользователь {username} удален из списка.")
         else:
-            print(f"Username {username} hasn't been found in the list.")
+            print("Такого пользователя не существует.")
 
 
 class SuperAdminManager(AdminManager):
     def ban_all_users(self) -> None:
-        if self.usernames:
-            self.usernames.clear()
-            print("All usernames has been cleared.")
-        else:
-            print("The list of usernames is already empty .")
+        self.usernames.clear()
+        print("Все пользователи удалены из списка.")
 
 
 if __name__ == '__main__':
-    usernames = SuperAdminManager()
-    username_list = ['Vaughn', 'Wilhelm', 'Santaros', 'Porter', 'Smith']
-    
-    [usernames.add_user(x) for x in username_list]
-    print(usernames.get_users())
-
-    usernames.ban_username('Wilhelm')
-    usernames.ban_username('Arsen')
-    print(usernames.get_users())
-
-    usernames.ban_all_users()
-    print(usernames.get_users())
-    usernames.ban_all_users()
+    users = SuperAdminManager()
+    users.add_user('Julia')
+    users.add_user('Alex')
+    users.get_users()
+    users.ban_username('Julia')
+    users.ban_username('Juliass')
+    users.add_user('Vasily')
+    users.get_users()
+    users.ban_all_users()
+    users.get_users()
