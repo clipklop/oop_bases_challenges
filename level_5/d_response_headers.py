@@ -1,3 +1,4 @@
+
 """
 У нас есть класс BaseResponse, который только работает с контентом, но он не умеет генерировать headers.
 Нужно создать свой кастомный класс ответа, который сможет это делать
@@ -12,19 +13,16 @@
 """
 
 
-from typing import Mapping
-
-
 class BaseResponse:
-    def __init__(self, content: str) -> None:
+    def __init__(self, content: str):
         self.content = content
 
-    def get_byte_content_length(self) -> str:
+    def get_byte_content_length(self):
         return len(self.content.encode('utf-8'))
 
 
 class BaseHeadersMixin:
-    def generate_base_headers(self) -> Mapping[str, str]:
+    def generate_base_headers(self):
         return {
             'Content-Type': 'application/x-www-form-urlencoded',
             'user-agent': (
@@ -33,20 +31,11 @@ class BaseHeadersMixin:
             ),
         }
 
-    def generate_headers(self) -> Mapping[str, str]:
+    def generate_headers(self):
         return self.generate_base_headers()
 
 
-class CustomResponse(BaseResponse, BaseHeadersMixin):
-    def generate_headers(self) -> Mapping[str, str]:
-        custom_headers = super().generate_headers()
-        custom_headers.update({
-            "Content-Length": self.get_byte_content_length()
-        })
-        return custom_headers
-
+# код писать тут
 
 if __name__ == '__main__':
-    custom_response = CustomResponse(content='Hello, World!')
-    print(custom_response.content)
-    print(custom_response.generate_headers())
+    pass  # код писать тут

@@ -1,3 +1,4 @@
+
 """
 У нас есть класс формы и метод для валидации в нем. Мы хотим создать форму для авторизации, где нам важно чтобы юзернэйм
 существовал в базе данных
@@ -13,29 +14,21 @@ USERNAMES_IN_DB = ['Alice_2023', 'BobTheBuilder', 'CrazyCoder', 'DataDiva', 'Epi
 
 
 class Form:
-    def __init__(self, username: str, password: str) -> None:
+    def __init__(self, username: str, password: str):
         self.username = username
         self.password = password
 
-    def valid_form(self) -> bool:
+    def valid_form(self):
         return len(self.password) > 8
 
 
 class AuthorizationFormMixin:
-    def valid_form(self) -> bool:
-        return len(self.password) > 8 and self.username in USERNAMES_IN_DB
+    def valid_form(self):
+        pass  # писать код тут
 
 
-class AuthorizationForm(AuthorizationFormMixin, Form):
-    pass
+# писать код тут
 
 
 if __name__ == '__main__':
-    authorization_form_1 = AuthorizationForm(username='BobTheBuilder', password='bob123') # password validation error
-    print(f"{authorization_form_1.username} is password valid: {authorization_form_1.valid_form()}")
-
-    authorization_form_2 = AuthorizationForm(username='CrazyCoder', password='YouThinkMICrazy88?') # valid user
-    print(f"{authorization_form_2.username} is password valid: {authorization_form_2.valid_form()}")
-
-    authorization_form_3 = AuthorizationForm(username='Pythonista', password='OMGWTFCMONYO99') # invalid username
-    print(f"{authorization_form_3.username} is password valid: {authorization_form_3.valid_form()}")
+    pass  # писать код тут

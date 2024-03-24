@@ -14,24 +14,38 @@
 """
 import csv
 import json
+from typing import Mapping
 
 
 class FileHandler:
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> None:
         self.filename = filename
 
-    def read(self):
-        with open(self.filename, 'r') as file:
+    def read(self) -> str:
+        with open(self.filename, 'r', encoding='utf-8') as file:
             return file.read()
 
 
 class JSONHandler(FileHandler):
-    pass  # код писать тут
+    # Here mypy is not happy, because we're violating the Liskov Substitution Principle
+    def read(self) -> Mapping[str, str | int | float | bool]:
+        with open(self.filename, 'r', encoding='utf-8') as file:
+            return json.load(file)
 
 
 class CSVHandler(FileHandler):
-    pass  # код писать тут
+    # Here mypy is not happy, because we're violating the Liskov Substitution Principle
+    def read(self) -> list[Mapping[str, str | int | float | bool]]:
+        with open(self.filename, 'r', encoding='utf-8') as file:
+            return list(csv.DictReader(file))
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    fh = FileHandler('data/text.txt')
+    # print(fh.read())
+
+    jh = JSONHandler('data/recipes.json')
+    # print(jh.read())
+
+    ch = CSVHandler('data/user_info.csv')
+    # print(ch.read())

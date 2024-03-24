@@ -1,3 +1,4 @@
+
 """
 У нас есть базовый класс продукта, а так же есть миксин для продуктов питания, но нет класса для продуктов питания.
 
@@ -12,7 +13,7 @@
 
 
 class Product:
-    def __init__(self, title: str, price: float) -> None:
+    def __init__(self, title: str, price: float):
         self.title = title
         self.price = price
 
@@ -27,16 +28,14 @@ class FoodProductMixin:
 
 class FoodProduct(Product, FoodProductMixin):
     def get_product_info(self) -> str:
-        if super().is_premium_food():
-            return super().get_product_info() + ' (Premuim)'
-        
-        return super().get_product_info()
+        if self.is_premium_food():
+            return f'Product title: {self.title}, price: {self.price} (Premium)'
+
+        return f'Product title: {self.title}, price: {self.price}'
 
 
 if __name__ == '__main__':
-    food_product_1 = FoodProduct(title='Avocado', price=12)
-    print(food_product_1.get_product_info())
-    
-    food_product_2 = FoodProduct(title='Хлебушек', price=6)
-    print(food_product_2.get_product_info())
-
+    fp = FoodProduct(title='Avocado', price=12)
+    print(fp.get_product_info())
+    fp2 = FoodProduct(title='Potato', price=5)
+    print(fp2.get_product_info())
