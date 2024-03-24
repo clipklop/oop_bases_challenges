@@ -1,3 +1,4 @@
+
 """
 У нас есть класс Product, который подходит для многих продуктов, но не для еды.
 В пищевом продукте нам нужно хранить еще срок годности, который будет влиять и на другие методы
@@ -10,11 +11,11 @@
        меньше чем текущая дата - то is_available должен возвращать False. Используйте super() для этого.
     3. Создайте экземпляры каждого из двух классов и вызовите у них все доступные методы
 """
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 class Product:
-    def __init__(self, title, quantity) -> None:
+    def __init__(self, title, quantity):
         self.title = title
         self.quantity = quantity
 
@@ -26,26 +27,8 @@ class Product:
 
 
 class FoodProduct(Product):
-    def __init__(self, title, quantity, expiration_date) -> None:
-        super().__init__(title, quantity)
-        self.expiration_date = expiration_date
-
-    def get_full_info(self):
-        return f'Product {self.title}, {self.quantity} with expiration date of {self.expiration_date} in stock.'
-    
-    def is_available(self):
-        return super().is_available() and self.expiration_date > datetime.today()
+    pass  # код писать тут
 
 
 if __name__ == '__main__':
-    product = Product(title='Тряпочка', quantity=999)
-    print(product.get_full_info())
-    print(product.is_available())
-
-    food_product = FoodProduct(
-        title='Хлебушек', 
-        quantity=33, 
-        expiration_date=datetime.today() - timedelta(days=1) # yesterday's date
-    )
-    print(food_product.get_full_info())
-    print(food_product.is_available())
+    pass  # код писать тут
