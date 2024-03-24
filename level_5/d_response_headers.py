@@ -12,17 +12,19 @@
     3. Создайте экземпляр класса CustomResponse и вызовите у него метод generate_headers, все ли хэдэры теперь на месте.
 """
 
+from typing import Mapping
+
 
 class BaseResponse:
-    def __init__(self, content: str):
+    def __init__(self, content: str) -> None:
         self.content = content
 
-    def get_byte_content_length(self):
+    def get_byte_content_length(self) -> int:
         return len(self.content.encode('utf-8'))
 
 
 class BaseHeadersMixin:
-    def generate_base_headers(self):
+    def generate_base_headers(self) -> Mapping[str, str]:
         return {
             'Content-Type': 'application/x-www-form-urlencoded',
             'user-agent': (
@@ -31,11 +33,17 @@ class BaseHeadersMixin:
             ),
         }
 
-    def generate_headers(self):
+    def generate_headers(self) -> dict[str, str]:
         return self.generate_base_headers()
 
 
-# код писать тут
+class CustomResponse(BaseResponse, BaseHeadersMixin):
+    def generate_headers(self) -> dict[str, str]:
+        headers = super().generate_headers()
+        headers['Content-Length'] = str(self.get_byte_content_length())
+        return headers
+
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    cr = CustomResponse('Hello, world!')
+    print(cr.generate_headers())

@@ -1,4 +1,3 @@
-
 """
 У нас есть класс формы и метод для валидации в нем. Мы хотим создать форму для авторизации, где нам важно чтобы юзернэйм
 существовал в базе данных
@@ -10,25 +9,32 @@
     3. Создайте экземпляр класса AuthorizationForm и вызовите у него метод valid_form. Должны отрабатывать обе проверки:
        и на длину пароля и на наличия юзернэйма в базе
 """
-USERNAMES_IN_DB = ['Alice_2023', 'BobTheBuilder', 'CrazyCoder', 'DataDiva', 'EpicGamer', 'JavaJunkie']
+
+USERNAMES_IN_DB = [
+    'Alice_2023', 'BobTheBuilder', 'CrazyCoder', 'DataDiva', 'EpicGamer', 'JavaJunkie'
+    ]
 
 
 class Form:
-    def __init__(self, username: str, password: str):
+    def __init__(self, username: str, password: str) -> None:
         self.username = username
         self.password = password
 
-    def valid_form(self):
+    def valid_form(self) -> bool:
         return len(self.password) > 8
 
 
 class AuthorizationFormMixin:
-    def valid_form(self):
-        pass  # писать код тут
+    def valid_form(self) -> bool:
+        return super().valid_form() and self.username in USERNAMES_IN_DB
 
 
-# писать код тут
+class AuthorizationForm(Form, AuthorizationFormMixin):
+    pass
 
 
 if __name__ == '__main__':
-    pass  # писать код тут
+    af = AuthorizationForm('Alice_2023', 'qwerty123')
+    print(af.valid_form())
+    af2 = AuthorizationForm('BobTheBuilder', 'qwerty1')
+    print(af2.valid_form())
