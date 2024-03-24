@@ -14,40 +14,24 @@
 """
 import csv
 import json
-from pathlib import Path
-from typing import Union
-from pprint import pprint
-from typing import Mapping
 
 
 class FileHandler:
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename):
         self.filename = filename
-        self.filename_path = Path('data', filename)
 
-    def read(self) -> str:
-        with open(self.filename_path, 'r') as file:
+    def read(self):
+        with open(self.filename, 'r') as file:
             return file.read()
 
 
 class JSONHandler(FileHandler):
-    def read(self) -> Mapping['str', Union[list[str], int, str]]:
-        with open(self.filename_path, 'r') as json_file:
-            return json.load(json_file)
+    pass  # код писать тут
 
 
 class CSVHandler(FileHandler):
-    def read(self) -> list[dict[str, str]]:
-        with open(self.filename_path, 'r') as csv_file:
-            return [x for x in csv.DictReader(csv_file)]
+    pass  # код писать тут
 
 
 if __name__ == '__main__':
-    text = FileHandler('text.txt')
-    pprint(text.read())
-    
-    recipes = JSONHandler('recipes.json')
-    pprint(recipes.read())
-
-    user_info = CSVHandler('user_info.csv')     
-    pprint(user_info.read())
+    pass  # код писать тут
