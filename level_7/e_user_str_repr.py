@@ -8,10 +8,16 @@
 
 
 class User:
-    def __init__(self, user_id: int, email: str, is_admin: bool):
+    def __init__(self, user_id: int, email: str, is_admin: bool) -> None:
         self.user_id = user_id
         self.email = email
         self.is_admin = is_admin
+
+    def __str__(self) -> str:
+        return f'User {self.user_id} with email {self.email}'
+
+    def __repr__(self) -> str:
+        return f'User {self.user_id} with email {self.email} and admin status {self.is_admin}'
 
 
 if __name__ == '__main__':

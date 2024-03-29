@@ -12,13 +12,20 @@
 class BankAccount:
     min_balance = -100
 
-    def __init__(self, owner: str, balance: float):
+    def __init__(self, owner: str, balance: float) -> None:
         self.owner = owner
         self.balance = balance
 
-    def decrease_balance(self, amount: float):
-        pass  # писать код тут
+    def decrease_balance(self, amount: float) -> None:
+        if self.balance - amount < self.min_balance:
+            raise ValueError
+        self.balance -= amount
 
 
 if __name__ == '__main__':
-    pass  # писать код тут
+    ba = BankAccount('Dusky', 99.9)
+    ba.decrease_balance(900)
+    print(ba.balance)
+    ba1 = BankAccount('Musky', 99.9)
+    ba1.decrease_balance(199.9)
+    print(ba1.balance)
